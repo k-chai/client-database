@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Список клиентов</title>
+</head>
+<body>
+    <h2>Список клиентов</h2>
+    <p>Добро пожаловать, {{ username }}!</p>
+    <form method="post" action="/clients">
+        <table border="1">
+            <tr>
+                <th>Номер счета</th>
+                <th>Фамилия</th>
+                <th>Имя</th>
+                <th>Отчество</th>
+                <th>Дата рождения</th>
+                <th>ИНН</th>
+                <th>ФИО ответственного</th>
+                <th>Текущий статус</th>
+                <th>Новый статус</th>
+            </tr>
+            {% for client in clients %}
+            <tr>
+                <td>{{ client['Номер_счета'] }}</td>
+                <td>{{ client['Фамилия'] }}</td>
+                <td>{{ client['Имя'] }}</td>
+                <td>{{ client['Отчество'] }}</td>
+                <td>{{ client['Дата_рождения'] }}</td>
+                <td>{{ client['ИНН'] }}</td>
+                <td>{{ client['ФИО_ответственного'] }}</td>
+                <td>{{ client['Статус'] }}</td>
+                <td>
+                    <input type="hidden" name="account_number[]" value="{{ client['Номер_счета'] }}">
+                    <select name="new_status[]">
+                        <option value="Не в работе" {% if client['Статус'] == 'Не в работе' %} selected {% endif %}>Не в работе</option>
+                        <option value="В работе" {% if client['Статус'] == 'В работе' %} selected {% endif %}>В работе</option>
+                        <option value="Отказ" {% if client['Статус'] == 'Отказ' %} selected {% endif %}>Отказ</option>
+                        <option value="Сделка закрыта" {% if client['Статус'] == 'Сделка закрыта' %} selected {% endif %}>Сделка закрыта</option>
+                    </select>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+
+        <br>
+        <input type="submit" value="Сохранить изменения">
+    </form>
+
+    <br>
+    <a href="/logout">Выйти</a>
+</body>
+</html>
+

@@ -53,7 +53,7 @@ def generate_user_data(num_records):
     for _ in range(num_records):
         full_name = ' '.join(generate_name())
         login = ''.join(filter(str.isalpha, translit(' '.join(full_name.split()[:2]), 'ru', reversed=True).lower()))
-        password = fake.password(length=10, special_chars=True, digits=True, upper_case=True, lower_case=True)
+        password = fake.password(length=10, special_chars=False, digits=True, upper_case=True, lower_case=True)
         users.append((full_name, login, password))
     return users
 
