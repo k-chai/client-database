@@ -1,9 +1,8 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 import sqlite3
-from werkzeug.security import check_password_hash
 
 app = Flask(__name__)
-app.secret_key = 'your_secret_key'  # Замените на случайную строку для безопасности
+app.secret_key = 'secret_key'  
 
 # Функция для установки соединения с базой данных
 def get_db_connection():
